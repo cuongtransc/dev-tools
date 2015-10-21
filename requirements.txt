@@ -1,0 +1,6 @@
+flask
+psycopg2
+# sqlalchemy
+# flask-sqlalchemy
+flask-wtf
+flask-log
