@@ -5,7 +5,9 @@ from flask import jsonify, request
 
 from database_cloner import DatabaseCloner
 from config import DATABASE_BACKUP
+import time
 
+snapshots = []
 
 @app.route('/')
 def root():
@@ -14,9 +16,13 @@ def root():
 
 @app.route('/api/db/backup', methods=['POST'])
 def backup_database():
-    db_cloner = DatabaseCloner()
-    snapshotId = db_cloner.backup(DATABASE_BACKUP)
+    # db_cloner = DatabaseCloner()
+    # snapshotId = db_cloner.backup(DATABASE_BACKUP)
+    #
+    time.sleep(10)
 
+    snapshotId = 'fake{:02}'.format(len(snapshots))
+    snapshots.append(snapshotId)
     msg = dict()
     msg['status'] = 'success'
     msg['snapshotId'] = snapshotId
@@ -26,11 +32,11 @@ def backup_database():
 
 @app.route('/api/db/restore', methods=['POST'])
 def restore_database():
-    snapshotId = request.json['snapshotId']
-    app.logger.info('restore: snapshotId = {}'.format(snapshotId))
-
-    db_cloner = DatabaseCloner()
-    db_cloner.restore(snapshotId, DATABASE_BACKUP)
+    # snapshotId = request.json['snapshotId']
+    # app.logger.info('restore: snapshotId = {}'.format(snapshotId))
+    #
+    # db_cloner = DatabaseCloner()
+    # db_cloner.restore(snapshotId, DATABASE_BACKUP)
 
     msg = dict()
     msg['status'] = 'success'
@@ -40,9 +46,9 @@ def restore_database():
 
 @app.route('/api/db/snapshots', methods=['GET'])
 def get_snapshots():
-    db_cloner = DatabaseCloner()
-    snapshot_pattern = '{}\_'.format(DATABASE_BACKUP)
-    snapshots = db_cloner.get_list_schemas(snapshot_pattern)
+    # db_cloner = DatabaseCloner()
+    # snapshot_pattern = '{}\_'.format(DATABASE_BACKUP)
+    # snapshots = db_cloner.get_list_schemas(snapshot_pattern)
 
     msg = dict()
     msg['status'] = 'success'

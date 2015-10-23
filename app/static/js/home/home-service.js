@@ -17,7 +17,8 @@ angular.module('myapp').factory('SnapshotServices', ['$http', '$resource', funct
         return $http({
             url: '/api/db/backup',
             dataType: "json",
-            method: "POST"
+            method: "POST",
+            //timeout: 5000
         }).then(function (res) {
             if (typeof(callback) == "function") {
                 callback();
@@ -31,6 +32,7 @@ angular.module('myapp').factory('SnapshotServices', ['$http', '$resource', funct
             url: '/api/db/restore',
             dataType: "json",
             method: "POST",
+            //timeout: 5000,
             data: {
                 snapshotId: snapshotId
             }
