@@ -20,6 +20,10 @@ angular.module('myapp')
                 if (data.status == "success") {
                 } else {
                 }
+            }, function () {
+                $timeout(function () {
+                    $scope.hideLoading();
+                }, 500);
             });
         };
 
@@ -29,12 +33,16 @@ angular.module('myapp')
                 SnapshotServices.restoreDatabase($scope.currentSnapshot, function () {
                     $timeout(function () {
                         $scope.hideLoading();
-                    }, 500);
+                    }, 200);
                 }).then(function (data) {
                     if (data.status == "success") {
                         $scope.currentSnapshot = "";
                     } else {
                     }
+                }, function () {
+                    $timeout(function () {
+                        $scope.hideLoading();
+                    }, 500);
                 });
             }
         };
@@ -43,6 +51,5 @@ angular.module('myapp')
             $('.active').removeClass('active');
             $($event.currentTarget).find('span').addClass('active');
             $scope.currentSnapshot = snapshotId;
-//            console.log($scope.currentSnapshot)
         };
     }]);
