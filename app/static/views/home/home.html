@@ -1,33 +1,27 @@
-<div class="container-fluid"  ng-controller="HomeController" ng-init="getSnapshots()">
+<div class="container-fluid" ng-controller="HomeController" ng-init="getSnapshots()">
     <!--<div class="row">-->
-        <!--<div class="col-md-8">-->
-            <!--<h1>Welcome to Myapp!</h1>-->
-            <!--<p class="lead">This is your homepage, ready for editing</p>-->
+    <!--<div class="col-md-8">-->
+    <!--<h1>Welcome to Myapp!</h1>-->
+    <!--<p class="lead">This is your homepage, ready for editing</p>-->
 
-            <!--<p>-->
-             <!--<span translate="main.like">If you like this Angular-Flask generator, please give us a star at </span>&nbsp;<a href="https://github.com/rayokota/generator-angular-flask" target="_blank" translate="main.github">Github</a>!-->
-            <!--</p>-->
-        <!--</div>-->
+    <!--<p>-->
+    <!--<span translate="main.like">If you like this Angular-Flask generator, please give us a star at </span>&nbsp;<a href="https://github.com/rayokota/generator-angular-flask" target="_blank" translate="main.github">Github</a>!-->
+    <!--</p>-->
     <!--</div>-->
-    <div class="col-lg-6 col-lg-6">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Seq</th>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="value in listSnapshot track by $index" ng-click="chooseSnapshot(value)">
-                        <td>{{index}}</td>
-                        <td>{{value}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-lg-6 col-lg-6">
-            <!--<button ng-click="getSnapshots()">Get Snapshots</button>-->
-            <button ng-click="backupDatabase()">Backup</button>
-            <button ng-click="restoreDatabase()">Restore</button>
-        </div>
+    <!--</div>-->
+
+    <div class="col-lg-3 col-md-3">
+        <ol class="list-snapshot">
+            <li ng-repeat="value in listSnapshot track by $index" ng-click="chooseSnapshot(value, $event)">
+                <span>{{ value }}</span>
+            </li>
+        </ol>
+    </div>
+
+    <div class="col-lg-9 col-md-9">
+        <button class="btn btn-primary" ng-click="backupDatabase()">Backup</button>
+        <button class="btn btn-primary" ng-click="restoreDatabase()">Restore</button>
+    </div>
+
+    <loading></loading>
 </div>
